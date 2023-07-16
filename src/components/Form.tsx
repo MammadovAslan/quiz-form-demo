@@ -1,6 +1,6 @@
 import { useState } from "react";
 import FormAnswerOptions from "./FormAnswerOptions";
-import { handleKeyDown } from "../utils/formUtils";
+import { preventSubmit } from "../utils/formUtils";
 
 // interface FormProps {
 // }
@@ -8,6 +8,7 @@ import { handleKeyDown } from "../utils/formUtils";
 const Form: React.FC<any> = () => {
   const [selectedOption, setSelectedOption] = useState<string>("Один ответ");
   const [description, setDescription] = useState("");
+  const [answers, setAnswers] = useState<string[]>([]);
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -24,11 +25,16 @@ const Form: React.FC<any> = () => {
           className="input custom-input"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          onKeyDown={handleKeyDown}
+          onKeyDown={preventSubmit}
         />
       </div>
 
-      <FormAnswerOptions selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
+      <FormAnswerOptions
+        selectedOption={selectedOption}
+        setSelectedOption={setSelectedOption}
+        setAnswers={setAnswers}
+        answers={answers}
+      />
 
       <button className="btn-main">Добавить Квиз</button>
     </form>

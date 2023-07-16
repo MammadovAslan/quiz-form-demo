@@ -1,4 +1,3 @@
-import React from "react";
 import { useState } from "react";
 import Form from "../components/Form";
 const Main = () => {
@@ -9,8 +8,8 @@ const Main = () => {
       <button className="btn-main mt-4 mr-4" onClick={() => setShowForm((prev) => !prev)}>
         Создать
       </button>
-      {/* {showForm && <Form />} */}
-      <Form />
+      {showForm && <Form />}
+      {/* <Form /> */}
     </div>
   );
 };

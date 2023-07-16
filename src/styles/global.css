@@ -7,7 +7,6 @@
   margin: 0;
   padding: 0;
   outline: none;
-  list-style: non;
 }
 
 .selected-option {
@@ -32,6 +31,10 @@
 
 .focus-border-left {
   @apply focus-within:border-l-4 focus-within:border-l-blue-600;
+}
+
+.focus-border-bottom {
+  @apply border-b-4 border-transparent focus-within:border-b-4 focus-within:border-b-purple-600;
 }
 
 .ease-transition {

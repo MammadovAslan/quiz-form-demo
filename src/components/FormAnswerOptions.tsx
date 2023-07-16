@@ -1,12 +1,19 @@
-import { handleKeyDown } from "../utils/formUtils";
+import { preventSubmit } from "../utils/formUtils";
 import FormAnswers from "./FormAnswers";
 
 interface OptionsProps {
   selectedOption: string;
+  answers: string[];
   setSelectedOption: React.Dispatch<React.SetStateAction<string>>;
+  setAnswers: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-const FormAnswerOptions: React.FC<OptionsProps> = ({ selectedOption, setSelectedOption }) => {
+const FormAnswerOptions: React.FC<OptionsProps> = ({
+  selectedOption,
+  setSelectedOption,
+  answers,
+  setAnswers,
+}) => {
   const handleOptionSelect = (option: string) => {
     setSelectedOption(option);
   };
@@ -18,7 +25,7 @@ const FormAnswerOptions: React.FC<OptionsProps> = ({ selectedOption, setSelected
           type="text"
           placeholder="Вопрос"
           className="input custom-input"
-          onKeyDown={handleKeyDown}
+          onKeyDown={preventSubmit}
         />
         <div className="dropdown dropdown-left dropdown-start">
           <label tabIndex={0} className="btn m-1 capitalize">
@@ -56,7 +63,7 @@ const FormAnswerOptions: React.FC<OptionsProps> = ({ selectedOption, setSelected
         </div>
       </div>
 
-      <FormAnswers />
+      <FormAnswers answers={answers} setAnswers={setAnswers} />
     </div>
   );
 };
