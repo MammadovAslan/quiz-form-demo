@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  list-style: non;
+}
+
+.selected-option {
+  background-color: rgba(126, 126, 126, 0.2);
+}
+
+.form {
+  @apply flex flex-col [&>*]:border [&>*]:border-l-4 gap-8 [&>*]:p-6  [&>*]:rounded-lg;
+}
+
+.form-header {
+  @apply border-t-8  border-t-purple-800 rounded-lg p-6;
+}
+
+.title {
+  @apply text-xl font-semibold;
+}
+
+.form-settings {
+  @apply flex items-center justify-between;
+}
+
+.focus-border-left {
+  @apply focus-within:border-l-4 focus-within:border-l-blue-600;
+}
+
+.ease-transition {
+  @apply ease-in-out duration-300;
+}
+
+.custom-input {
+  @apply input-bordered w-full max-w-xs h-8 border-l-0 border-r-0 rounded-sm;
+}
+
+.btn-main {
+  @apply btn btn-accent text-white self-end p-0 px-4;
+}
+
+.flex-column {
+  @apply flex flex-col gap-8;
+}
