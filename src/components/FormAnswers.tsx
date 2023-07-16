@@ -33,7 +33,7 @@ const FormAnswers: React.FC<AnswersProps> = ({ answers, setAnswers }) => {
     });
   };
 
-  const handleAnswerKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, index: number): void => {
+  const handleAnswerKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, _index: number): void => {
     if (e.key === "Enter") {
       e.preventDefault();
       setEditingIndex(null);
