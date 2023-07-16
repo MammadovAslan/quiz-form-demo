@@ -1,25 +1,39 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface AnswersProps {
   answers: string[];
   setAnswers: React.Dispatch<React.SetStateAction<string[]>>;
+  answer: string;
+  setAnswer: React.Dispatch<React.SetStateAction<string>>;
+  answerType: string;
 }
 
-const FormAnswers: React.FC<AnswersProps> = ({ answers, setAnswers }) => {
-  const [answersCount, setAnswersCount] = useState(answers.length);
-  const [answer, setAnswer] = useState("");
+const FormAnswers: React.FC<AnswersProps> = ({
+  answers,
+  setAnswers,
+  answer,
+  setAnswer,
+  answerType,
+}) => {
+  const [answersCount, setAnswersCount] = useState(0);
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    setAnswersCount(answers.length);
+  }, [answers]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>): void => {
     if (e.key === "Enter") {
       e.preventDefault();
       if (answer.trim() !== "") {
         setAnswers((prevAnswers) => [...prevAnswers, answer]);
-        setAnswer("");
+        answerType !== "Текст" && setAnswer("");
         setAnswersCount((prevCount) => prevCount + 1);
       }
     }
   };
+
+  if (answerType === "Текст") return <p className="h-8 m-0">Текстовый ответ</p>;
 
   const handleAnswerClick = (index: number): void => {
     setEditingIndex(index);
@@ -58,7 +72,7 @@ const FormAnswers: React.FC<AnswersProps> = ({ answers, setAnswers }) => {
             {editingIndex === index ? (
               <input
                 type="text"
-                className=" py-0  focus-border-bottom "
+                className="py-0  focus-border-bottom "
                 value={el}
                 onChange={handleAnswerChange}
                 onKeyDown={(e) => handleAnswerKeyDown(e, index)}

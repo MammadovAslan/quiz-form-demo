@@ -14,7 +14,7 @@
 }
 
 .form {
-  @apply flex flex-col [&>*]:border [&>*]:border-l-4 gap-8 [&>*]:p-6  [&>*]:rounded-lg;
+  @apply flex flex-col  [&>*]:border [&>*]:border-l-4 gap-8 [&>*]:p-6  [&>*]:rounded-lg;
 }
 
 .form-header {
@@ -26,7 +26,7 @@
 }
 
 .form-settings {
-  @apply flex items-center justify-between;
+  @apply flex sm:items-center justify-between sm:flex-row flex-col gap-4;
 }
 
 .focus-border-left {
@@ -51,4 +51,16 @@
 
 .flex-column {
   @apply flex flex-col gap-8;
+}
+
+.table {
+  @apply grid grid-cols-3 gap-4;
+}
+
+.table-item {
+  @apply bg-white p-4 text-center;
+}
+
+.table-header {
+  @apply bg-gray-100 p-4 font-bold text-center;
 }
