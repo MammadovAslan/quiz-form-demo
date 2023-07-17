@@ -38,7 +38,7 @@
 }
 
 .ease-transition {
-  @apply ease-in-out duration-300;
+  @apply ease-in-out duration-200;
 }
 
 .custom-input {

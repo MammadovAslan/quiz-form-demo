@@ -1,7 +1,7 @@
 import { useState } from "react";
 import FormAnswerOptions from "./FormAnswerOptions";
 import { preventSubmit } from "../utils/formUtils";
-import { Quiz } from "../interfaces/interfaces";
+import { Quiz, Answer } from "../interfaces/interfaces";
 
 interface FormProps {
   data: Quiz[];
@@ -11,7 +11,7 @@ interface FormProps {
 const Form: React.FC<FormProps> = ({ data, setData }) => {
   const [answersType, setAnswerType] = useState<string>("Один ответ");
   const [description, setDescription] = useState("");
-  const [answers, setAnswers] = useState<string[]>([]);
+  const [answers, setAnswers] = useState<Answer[]>([]);
   const [question, setQuestion] = useState("");
 
   //TODO validation
@@ -20,21 +20,27 @@ const Form: React.FC<FormProps> = ({ data, setData }) => {
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const id = data.length > 0 ? data[data.length - 1].id + 1 : 1;
+    if (
+      question.length !== 0 &&
+      (answersType === "Текст" || answers.length >= 2) &&
+      answers.some((answer) => answer.isCorrect)
+    ) {
+      const id = data.length > 0 ? data[data.length - 1].id + 1 : 1;
 
-    const object: Quiz = {
-      title: question,
-      answers,
-      answersType,
-      description,
-      id,
-    };
+      const object: Quiz = {
+        title: question,
+        answers,
+        answersType,
+        description,
+        id,
+      };
 
-    setData((prev) => [...prev, object]);
-    setAnswerType("Один ответ");
-    setDescription("");
-    setAnswers([]);
-    setQuestion("");
+      setData((prev) => [...prev, object]);
+      setAnswerType("Один ответ");
+      setDescription("");
+      setAnswers([]);
+      setQuestion("");
+    }
   };
 
   return (

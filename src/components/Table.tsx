@@ -14,7 +14,7 @@ const Table: React.FC<TableProps> = ({ data }) => {
 
       {data?.length > 0 &&
         data.map((quiz: Quiz) => (
-          <TableItem answers={quiz.answers} id={quiz.id} title={quiz.title} key={quiz.id} />
+          <TableItem answers={quiz.answers } id={quiz.id} title={quiz.title} key={quiz.id} />
         ))}
     </div>
   );

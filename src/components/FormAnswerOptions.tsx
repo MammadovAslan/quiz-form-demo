@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { preventSubmit } from "../utils/formUtils";
 import FormAnswers from "./FormAnswers";
+import { Answer } from "../interfaces/interfaces";
+
+
 
 interface OptionsProps {
   answerType: string;
-  answers: string[];
+  answers: Answer[];
   setAnswersType: React.Dispatch<React.SetStateAction<string>>;
-  setAnswers: React.Dispatch<React.SetStateAction<string[]>>;
+  setAnswers: React.Dispatch<React.SetStateAction<Answer[]>>;
   question: string;
   setQuestion: React.Dispatch<React.SetStateAction<string>>;
 }
