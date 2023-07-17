@@ -13,12 +13,11 @@ export interface Answer {
 
 export interface Question {
   questionTitle: string;
-  answersType: string;
+  questionType: string;
   answers: Answer[];
 }
 
 export interface NewQuiz {
-  id: number;
   title: string;
   description: string;
   questions: Question[];

@@ -4,35 +4,36 @@ import FormAnswers from "./FormAnswers";
 import { Answer } from "../interfaces/interfaces";
 
 interface OptionsProps {
-  answerType: string;
+  questionType: string;
   answers: Answer[];
-  setAnswersType: React.Dispatch<React.SetStateAction<string>>;
+  answer: string;
+  setAnswer: React.Dispatch<React.SetStateAction<string>>;
+  setQuestionType: React.Dispatch<React.SetStateAction<string>>;
   setAnswers: React.Dispatch<React.SetStateAction<Answer[]>>;
   question: string;
   setQuestion: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const FormAnswerOptions: React.FC<OptionsProps> = ({
-  answerType,
-  setAnswersType,
+  questionType,
+  setQuestionType,
   answers,
   setAnswers,
   question,
   setQuestion,
+  answer,
+  setAnswer,
 }) => {
-  const [answer, setAnswer] = useState("");
-
   const handleOptionSelect = (option: string) => {
-    setAnswersType(option);
+    setQuestionType(option);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // const newString = e.target.value[0].toUpperCase() + e.target.value.slice(1);
     setQuestion(e.target.value);
   };
 
   return (
-    <div className="focus-border-left ease-transition flex-column bg-white">
+    <div className="quiz focus-border-left ease-transition flex-column bg-white">
       <div className="form-settings">
         <input
           type="text"
@@ -44,7 +45,7 @@ const FormAnswerOptions: React.FC<OptionsProps> = ({
         />
         <div className="dropdown sm:dropdown-left ">
           <label tabIndex={0} className="btn m-1 capitalize border-2 border-gray-300">
-            {answerType}
+            {questionType}
           </label>
           <ul
             tabIndex={0}
@@ -52,7 +53,7 @@ const FormAnswerOptions: React.FC<OptionsProps> = ({
           >
             <li>
               <a
-                className={answerType === "Один ответ" ? "selected-option" : ""}
+                className={questionType === "Один ответ" ? "selected-option" : ""}
                 onClick={() => handleOptionSelect("Один ответ")}
               >
                 Один ответ
@@ -60,7 +61,7 @@ const FormAnswerOptions: React.FC<OptionsProps> = ({
             </li>
             <li>
               <a
-                className={answerType === "Несколько ответов" ? "selected-option" : ""}
+                className={questionType === "Несколько ответов" ? "selected-option" : ""}
                 onClick={() => handleOptionSelect("Несколько ответов")}
               >
                 Несколько ответов
@@ -68,7 +69,7 @@ const FormAnswerOptions: React.FC<OptionsProps> = ({
             </li>
             <li>
               <a
-                className={answerType === "Текст" ? "selected-option" : ""}
+                className={questionType === "Текст" ? "selected-option" : ""}
                 onClick={() => handleOptionSelect("Текст")}
               >
                 Текст
@@ -83,7 +84,7 @@ const FormAnswerOptions: React.FC<OptionsProps> = ({
         setAnswers={setAnswers}
         answer={answer}
         setAnswer={setAnswer}
-        answerType={answerType}
+        questionType={questionType}
       />
     </div>
   );

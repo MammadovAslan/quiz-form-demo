@@ -7,7 +7,7 @@ interface AnswersProps {
   setAnswers: React.Dispatch<React.SetStateAction<Answer[]>>;
   answer: string;
   setAnswer: React.Dispatch<React.SetStateAction<string>>;
-  answerType: string;
+  questionType: string;
 }
 
 const FormAnswers: React.FC<AnswersProps> = ({
@@ -15,13 +15,13 @@ const FormAnswers: React.FC<AnswersProps> = ({
   setAnswers,
   answer,
   setAnswer,
-  answerType,
+  questionType,
 }) => {
   const [answersCount, setAnswersCount] = useState(0);
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
 
   useEffect(() => {
-    setAnswersCount(answers.length);
+    answers.length !==0 && setAnswersCount(answers.length);
   }, [answers]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>): void => {
@@ -29,27 +29,28 @@ const FormAnswers: React.FC<AnswersProps> = ({
       e.preventDefault();
       if (answer.trim() !== "") {
         setAnswers((prevAnswers) => [...prevAnswers, { answerTitle: answer, isCorrect: false }]);
-        answerType !== "Текст" && setAnswer("");
+        questionType !== "Текст" && setAnswer("");
         setAnswersCount((prevCount) => prevCount + 1);
       }
     }
   };
 
   useEffect(() => {
-    // Reset all checkboxes when answerType changes
-    setAnswers((prevAnswers) => {
-      return prevAnswers.map((answer) => {
-        return {
-          ...answer,
-          isCorrect: false,
-        };
+    if (questionType === "Текст") {
+      setAnswers([]);
+    } else {
+      setAnswers((prevAnswers) => {
+        return prevAnswers.map((answer) => {
+          return {
+            ...answer,
+            isCorrect: false,
+          };
+        });
       });
-    });
+    }
+  }, [questionType]);
 
-    if (answerType === "Текст") setAnswers([]);
-  }, [answerType]);
-
-  if (answerType === "Текст") return <p className="h-8 m-0">Текстовый ответ</p>;
+  if (questionType === "Текст") return <p className="h-8 m-0">Текстовый ответ</p>;
 
   const handleAnswerClick = (index: number): void => {
     setEditingIndex(index);
@@ -82,7 +83,7 @@ const FormAnswers: React.FC<AnswersProps> = ({
       const updatedAnswers = [...prevAnswers];
       const currentAnswer = updatedAnswers[index];
 
-      if (answerType === "Один ответ") {
+      if (questionType === "Один ответ") {
         updatedAnswers.forEach((answer) => {
           answer.isCorrect = false;
         });
