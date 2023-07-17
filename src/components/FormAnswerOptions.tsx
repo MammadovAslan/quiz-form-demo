@@ -27,8 +27,8 @@ const FormAnswerOptions: React.FC<OptionsProps> = ({
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newString = e.target.value[0].toUpperCase() + e.target.value.slice(1);
-    setQuestion(newString);
+    // const newString = e.target.value[0].toUpperCase() + e.target.value.slice(1);
+    setQuestion(e.target.value);
   };
 
   return (

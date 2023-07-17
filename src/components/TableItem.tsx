@@ -1,4 +1,5 @@
 import { Answer } from "../interfaces/interfaces";
+import { v4 as uuidv4 } from "uuid";
 
 interface TableItemProps {
   title: string;
@@ -15,8 +16,8 @@ const TableItem: React.FC<TableItemProps> = ({ answers, id, title }) => {
         {answers.length === 0
           ? "Ответ текстом"
           : answers.map((el) => (
-              <span className={`${el.isCorrect ? "text-green-500" : ""}`} key={`${id}-${el.text}`}>
-                {el.text},{" "}
+              <span className={`${el.isCorrect ? "text-green-500" : ""}`} key={uuidv4()}>
+                {el.answerTitle},{" "}
               </span>
             ))}
       </div>

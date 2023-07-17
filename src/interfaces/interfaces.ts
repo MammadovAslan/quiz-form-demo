@@ -1,12 +1,25 @@
-export interface Quiz{
-    title:string,
-    description:string,
-    answers:Answer[]
-    answersType:string,
-    id:number
+export interface Quiz {
+  id: number;
+  title: string;
+  description: string;
+  answers: Answer[];
+  answersType: string;
 }
 
 export interface Answer {
-    text: string;
-    isCorrect: boolean;
-  }
+  answerTitle: string;
+  isCorrect: boolean;
+}
+
+export interface Question {
+  questionTitle: string;
+  answersType: string;
+  answers: Answer[];
+}
+
+export interface NewQuiz {
+  id: number;
+  title: string;
+  description: string;
+  questions: Question[];
+}

@@ -14,7 +14,7 @@
 }
 
 .form {
-  @apply flex flex-col md:w-[36rem] md:self-center [&>*]:border [&>*]:border-l-4 gap-8 [&>*]:p-6  [&>*]:rounded-lg;
+  @apply flex flex-col md:w-[36rem] md:self-center [&>*]:border [&>*]:border-l-4 gap-8 mb-8 [&>*]:p-6  [&>*]:rounded-lg;
 }
 
 .form-header {
@@ -34,7 +34,7 @@
 }
 
 .focus-border-bottom {
-  @apply border-b-4 border-transparent focus-within:border-b-4 focus-within:border-b-purple-600;
+  @apply border-b-2 border-transparent focus-within:border-b-2 focus-within:border-b-purple-600;
 }
 
 .ease-transition {

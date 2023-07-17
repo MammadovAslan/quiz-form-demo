@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { Answer } from "../interfaces/interfaces";
 
 interface AnswersProps {
-  answers: { text: string; isCorrect: boolean }[];
-  setAnswers: React.Dispatch<React.SetStateAction<{ text: string; isCorrect: boolean }[]>>;
+  answers: Answer[];
+  setAnswers: React.Dispatch<React.SetStateAction<Answer[]>>;
   answer: string;
   setAnswer: React.Dispatch<React.SetStateAction<string>>;
   answerType: string;
@@ -27,7 +28,7 @@ const FormAnswers: React.FC<AnswersProps> = ({
     if (e.key === "Enter") {
       e.preventDefault();
       if (answer.trim() !== "") {
-        setAnswers((prevAnswers) => [...prevAnswers, { text: answer, isCorrect: false }]);
+        setAnswers((prevAnswers) => [...prevAnswers, { answerTitle: answer, isCorrect: false }]);
         answerType !== "Текст" && setAnswer("");
         setAnswersCount((prevCount) => prevCount + 1);
       }
@@ -57,13 +58,13 @@ const FormAnswers: React.FC<AnswersProps> = ({
   const handleAnswerChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setAnswers((prevAnswers) => {
       const updatedAnswers = [...prevAnswers];
-      updatedAnswers[editingIndex!].text = e.target.value;
+      updatedAnswers[editingIndex!].answerTitle = e.target.value;
       return updatedAnswers;
     });
   };
 
   const handleAnswerBlur = (): void => {
-    if (editingIndex !== null && answers[editingIndex].text.trim() === "") {
+    if (editingIndex !== null && answers[editingIndex].answerTitle.trim() === "") {
       setAnswers((prevAnswers) => prevAnswers.filter((_, index) => index !== editingIndex));
       setEditingIndex(null);
     }
@@ -96,16 +97,6 @@ const FormAnswers: React.FC<AnswersProps> = ({
 
   return (
     <ul className="mx-4 flex-column gap-4">
-      <li>
-        <input
-          type="text"
-          placeholder={`Вариант ${answersCount + 1}`}
-          className="focus-border-bottom ease-transition"
-          value={answer}
-          onKeyDown={handleKeyDown}
-          onChange={(e) => setAnswer(e.target.value)}
-        />
-      </li>
       {answers.length !== 0 &&
         answers.map((el, index) => (
           <li key={uuidv4()} className="h-8 flex items-center">
@@ -115,7 +106,7 @@ const FormAnswers: React.FC<AnswersProps> = ({
                   type="checkbox"
                   checked={el.isCorrect}
                   onChange={() => handleCheckboxChange(index)}
-                  className="checkbox checkbox-xs checkbox-primary"
+                  className="checkbox checkbox-xs checkbox-primary no-animation"
                 />
                 <span className="checkmark"></span>
               </label>
@@ -123,7 +114,7 @@ const FormAnswers: React.FC<AnswersProps> = ({
                 <input
                   type="text"
                   className="py-0 focus-border-bottom flex-grow"
-                  value={el.text}
+                  value={el.answerTitle}
                   onChange={handleAnswerChange}
                   onBlur={handleAnswerBlur}
                   onKeyDown={(e) => handleAnswerKeyDown(e, index)}
@@ -134,12 +125,22 @@ const FormAnswers: React.FC<AnswersProps> = ({
                   onClick={() => handleAnswerClick(index)}
                   className="py-0 border-b-4 border-transparent flex-grow"
                 >
-                  {el.text}
+                  {el.answerTitle}
                 </p>
               )}
             </div>
           </li>
         ))}
+      <li>
+        <input
+          type="text"
+          placeholder={`Вариант ${answersCount + 1}`}
+          className="focus-border-bottom ease-transition"
+          value={answer}
+          onKeyDown={handleKeyDown}
+          onChange={(e) => setAnswer(e.target.value)}
+        />
+      </li>
     </ul>
   );
 };
