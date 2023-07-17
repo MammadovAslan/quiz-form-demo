@@ -3,8 +3,6 @@ import { preventSubmit } from "../utils/formUtils";
 import FormAnswers from "./FormAnswers";
 import { Answer } from "../interfaces/interfaces";
 
-
-
 interface OptionsProps {
   answerType: string;
   answers: Answer[];
@@ -39,7 +37,7 @@ const FormAnswerOptions: React.FC<OptionsProps> = ({
         <input
           type="text"
           placeholder="Вопрос"
-          className="input custom-input"
+          className="focus-border-bottom ease-transition"
           onKeyDown={preventSubmit}
           value={question}
           onChange={handleChange}

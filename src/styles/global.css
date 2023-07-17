@@ -14,7 +14,7 @@
 }
 
 .form {
-  @apply flex flex-col  [&>*]:border [&>*]:border-l-4 gap-8 [&>*]:p-6  [&>*]:rounded-lg;
+  @apply flex flex-col md:w-[36rem] md:self-center [&>*]:border [&>*]:border-l-4 gap-8 [&>*]:p-6  [&>*]:rounded-lg;
 }
 
 .form-header {
@@ -42,7 +42,7 @@
 }
 
 .custom-input {
-  @apply input-bordered w-full max-w-xs h-8 border-l-0 border-r-0 rounded-sm;
+  @apply w-full max-w-xs h-8 border-l-0 border-r-0 rounded-sm;
 }
 
 .btn-main {

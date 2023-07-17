@@ -44,13 +44,13 @@ const Form: React.FC<FormProps> = ({ data, setData }) => {
   };
 
   return (
-    <form className="form" onSubmit={submitHandler}>
+    <form className="form " onSubmit={submitHandler}>
       <div className="form-header focus-border-left ease-transition bg-white">
         <h2 className="title mb-4">Создать Квиз</h2>
         <input
           type="text"
           placeholder="Описание"
-          className="input custom-input"
+          className="focus-border-bottom ease-transition"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           onKeyDown={preventSubmit}

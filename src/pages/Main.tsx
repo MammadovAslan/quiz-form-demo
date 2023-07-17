@@ -11,8 +11,8 @@ const Main = () => {
       <button className="btn-main mt-4 mr-4" onClick={() => setShowForm((prev) => !prev)}>
         Создать
       </button>
-      {showForm && <Form data={data} setData={setData} />}
-      {/* <Form data={data} setData={setData} /> */}
+      {/* {showForm && <Form data={data} setData={setData} />} */}
+      <Form data={data} setData={setData} />
       <Table data={data} />
     </div>
   );
