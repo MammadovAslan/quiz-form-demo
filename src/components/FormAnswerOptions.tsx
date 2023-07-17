@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { preventSubmit } from "../utils/formUtils";
 import FormAnswers from "./FormAnswers";
 import { Answer } from "../interfaces/interfaces";
