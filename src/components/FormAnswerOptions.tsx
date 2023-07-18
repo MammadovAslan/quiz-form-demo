@@ -31,6 +31,21 @@ const FormAnswerOptions: React.FC<OptionsProps> = ({
     setQuestion(e.target.value);
   };
 
+  const renderDropdownOptions = () => {
+    const options = ["Один ответ", "Несколько ответов", "Текст"];
+
+    return options.map((option) => (
+      <li key={option}>
+        <a
+          className={questionType === option ? "selected-option" : ""}
+          onClick={() => handleOptionSelect(option)}
+        >
+          {option}
+        </a>
+      </li>
+    ));
+  };
+
   return (
     <div className="quiz focus-border-left ease-transition flex-column bg-white">
       <div className="form-settings">
@@ -50,34 +65,12 @@ const FormAnswerOptions: React.FC<OptionsProps> = ({
             tabIndex={0}
             className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
           >
-            <li>
-              <a
-                className={questionType === "Один ответ" ? "selected-option" : ""}
-                onClick={() => handleOptionSelect("Один ответ")}
-              >
-                Один ответ
-              </a>
-            </li>
-            <li>
-              <a
-                className={questionType === "Несколько ответов" ? "selected-option" : ""}
-                onClick={() => handleOptionSelect("Несколько ответов")}
-              >
-                Несколько ответов
-              </a>
-            </li>
-            <li>
-              <a
-                className={questionType === "Текст" ? "selected-option" : ""}
-                onClick={() => handleOptionSelect("Текст")}
-              >
-                Текст
-              </a>
-            </li>
+            {renderDropdownOptions()}
           </ul>
         </div>
       </div>
 
+      
       <FormAnswers
         answers={answers}
         setAnswers={setAnswers}

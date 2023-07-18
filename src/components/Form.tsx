@@ -38,6 +38,7 @@ const Form: React.FC<FormProps> = ({ data, setData }) => {
       answers.some((answer) => answer.isCorrect)
     ) {
       const obj: Question = {
+        id:uuidv4(),
         answers,
         questionType,
         questionTitle: question,
@@ -119,9 +120,12 @@ const Form: React.FC<FormProps> = ({ data, setData }) => {
         questions.map((el) => (
           <QuizQuestion
             key={uuidv4()}
+            id={el.id}
             answers={el.answers}
             questionTitle={el.questionTitle}
             questionType={el.questionType}
+            questions={questions}
+            setQuestions={setQuestions}
           />
         ))}
     </div>

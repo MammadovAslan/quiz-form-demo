@@ -14,7 +14,7 @@
 }
 
 .form {
-  @apply flex flex-col md:w-[36rem] md:self-center [&>*]:border [&>*]:border-l-4 gap-8 mb-8 [&>*]:p-6  [&>*]:rounded-lg;
+  @apply flex flex-col sm:w-[36rem] md:self-center [&>*]:border [&>*]:border-l-4 gap-8 mb-8 [&>*]:p-6  [&>*]:rounded-lg;
 }
 
 .question {
@@ -67,4 +67,48 @@
 
 .table-header {
   @apply bg-gray-100 p-4 font-bold text-center;
+}
+
+.answer {
+  @apply ml-4;
+}
+
+.edit-button {
+  @apply btn btn-primary btn-xs rounded-md text-white font-bold;
+}
+.delete-button {
+  @apply btn btn-secondary btn-xs rounded-md text-white font-bold;
+}
+
+.buttons-container {
+  @apply absolute bottom-4 right-6 animate-none flex-row gap-2;
+}
+
+.correct-answer {
+  position: relative;
+  @apply text-green-600;
+}
+
+.correct-answer::before {
+  position: absolute;
+  content: "";
+  width: 5px;
+  height: 2px;
+  left: -20px;
+  top: 52%;
+  transform: rotate(45deg);
+}
+.correct-answer::after {
+  position: absolute;
+  content: "";
+  width: 10px;
+  height: 2px;
+  left: -17px;
+  top: 50%;
+  transform: rotate(-45deg);
+}
+
+.correct-answer::before,
+.correct-answer::after {
+  background-color: #1dcdbc;
 }
