@@ -66,11 +66,11 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
     ));
   };
 
-  const deleteAnswer = () =>{
-    const arr = [...questions].filter(q=> q.id !== id)
+  const deleteAnswer = () => {
+    const arr = [...questions].filter((q) => q.id !== id);
 
-    setQuestions(arr)
-  }
+    setQuestions(arr);
+  };
 
   if (isModifiable) {
     return (
@@ -125,7 +125,7 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
         ))}
       </ul>
 
-      <div className="hidden group-hover:flex  buttons-container">
+      <div className="buttons-container">
         <button onClick={deleteAnswer} className="delete-button" title="Удалить">
           <FiDelete />
         </button>
@@ -139,13 +139,3 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
 };
 
 export default QuizQuestion;
-
-{
-  /* <FormAnswers
-answers={modifiedAnswers}
-setAnswers={setModifiedAnswers}
-answer={newAnswer}
-setAnswer={setNewAnswer}
-questionType={modifiedQuestionType}
-/> */
-}

@@ -81,7 +81,7 @@
 }
 
 .buttons-container {
-  @apply absolute bottom-4 right-6 animate-none flex-row gap-2;
+  @apply flex absolute top-2 sm:top-20 right-2 sm:right-6 animate-none flex-row gap-2;
 }
 
 .correct-answer {
