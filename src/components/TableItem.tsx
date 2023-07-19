@@ -1,10 +1,10 @@
-import { Answer } from "../interfaces/interfaces";
+import { AnswerText } from "../interfaces/interfaces";
 import { v4 as uuidv4 } from "uuid";
 
 interface TableItemProps {
   title: string;
   id: number;
-  answers: Answer[];
+  answers: AnswerText[];
 }
 
 const TableItem: React.FC<TableItemProps> = ({ answers, id, title }) => {

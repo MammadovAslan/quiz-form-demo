@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { AnswerText } from "../interfaces/interfaces";
 import ImageAnswers from "./ImageAnswers";
+import usePrevious from "../hooks/usePrevious";
 
 interface AnswersProps {
   answers: AnswerText[];
@@ -20,6 +21,7 @@ const FormAnswers: React.FC<AnswersProps> = ({
   questionType,
 }) => {
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
+  const prevQuestionType = usePrevious(questionType);
 
   useEffect(() => {
     setAnswer("");
@@ -86,17 +88,30 @@ const FormAnswers: React.FC<AnswersProps> = ({
       setAnswer("");
 
       if (answers.length > 1) {
-        const arr = [...answers];
+        const arr = [...answers].slice(0, 1);
 
-        for (let i = 0; i < arr.length; i++) {
-          arr.pop();
-        }
+        // for (let i = 0; i < arr.length - 1; i++) {
+        //   arr.pop();
+        // }
         arr[0].isCorrect = true;
         setAnswers(arr);
       }
     }
- 
   }, [questionType, setAnswers, setAnswer]);
+
+  useEffect(() => {
+    const textOptions = ["Один ответ", "Несколько ответов", "Текст"];
+    const imageOptions = ["Изображения(одно)", "Изображения(несколько)"];
+
+    if (prevQuestionType) {
+      if (
+        (textOptions.includes(questionType) && imageOptions.includes(prevQuestionType)) ||
+        (imageOptions.includes(questionType) && textOptions.includes(prevQuestionType))
+      ) {
+        setAnswers([]);
+      }
+    }
+  }, [questionType]);
 
   const canAddAnswer = questionType !== "Текст" || answers.length === 0;
 

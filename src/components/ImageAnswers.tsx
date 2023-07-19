@@ -1,6 +1,6 @@
 import { AnswerText } from "../interfaces/interfaces";
 import { v4 as uuidv4 } from "uuid";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 interface ImageAnswersProps {
   answers: AnswerText[];
@@ -10,13 +10,7 @@ interface ImageAnswersProps {
   questionType: string;
 }
 
-const ImageAnswers: React.FC<ImageAnswersProps> = ({
-  answer,
-  answers,
-  questionType,
-  setAnswer,
-  setAnswers,
-}) => {
+const ImageAnswers: React.FC<ImageAnswersProps> = ({ answers, questionType, setAnswers }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
 
@@ -54,7 +48,7 @@ const ImageAnswers: React.FC<ImageAnswersProps> = ({
   }, [questionType, answers.length, setAnswers]);
 
   return (
-    <div className="sm:w-[32rem]">
+    <div className="sm:w-[32rem] mb-8">
       <p className="required">
         <input
           type="file"

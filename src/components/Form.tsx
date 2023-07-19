@@ -86,11 +86,12 @@ const Form: React.FC<FormProps> = ({ data, setData }) => {
                 placeholder="Название квиза"
                 onChange={(e) => setQuizTitle(e.target.value)}
                 onBlur={() => setModifiable(false)}
+                required
               />
             ) : (
-              <h2 className="title mb-4 h-[28px]" onClick={clickHandler}>
+              <span className="title mb-4 h-[28px] block" onClick={clickHandler}>
                 {quizTitle || "Название квиза"}
-              </h2>
+              </span>
             )}
           </p>
           <input
