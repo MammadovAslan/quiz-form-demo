@@ -2,20 +2,25 @@ export interface Quiz {
   id: number;
   title: string;
   description: string;
-  answers: Answer[];
+  answers: AnswerText[];
   answersType: string;
 }
 
-export interface Answer {
+export interface AnswerText {
   answerTitle: string;
   isCorrect: boolean;
+}
+
+export interface AnswerImage{
+  source:string
+  isCorrect:boolean
 }
 
 export interface Question {
   id: string;
   questionTitle: string;
   questionType: string;
-  answers: Answer[];
+  answers: AnswerText[];
 }
 
 export interface NewQuiz {

@@ -25,6 +25,17 @@
   @apply border-t-8  border-t-purple-800 rounded-lg p-6;
 }
 
+.required {
+  @apply relative;
+}
+
+.required::before {
+  position: absolute;
+  content: "*";
+  color: red;
+  left: -10px;
+}
+
 .title {
   @apply text-xl font-semibold;
 }
@@ -81,9 +92,16 @@
 }
 
 .buttons-container {
-  @apply flex absolute top-2 sm:top-20 right-2 sm:right-6 animate-none flex-row gap-2;
+  @apply flex absolute bottom-2 right-2 sm:right-6 animate-none flex-row gap-2;
 }
 
+.image-correct {
+  @apply border-green-500;
+}
+
+.image-grid {
+  @apply grid sm:grid-cols-2 gap-4;
+}
 .correct-answer {
   position: relative;
   @apply text-green-600;
@@ -111,4 +129,8 @@
 .correct-answer::before,
 .correct-answer::after {
   background-color: #1dcdbc;
+}
+
+.file::-webkit-file-upload-button {
+  display: none;
 }

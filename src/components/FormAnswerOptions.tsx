@@ -1,14 +1,14 @@
 import { preventSubmit } from "../utils/formUtils";
 import FormAnswers from "./FormAnswers";
-import { Answer } from "../interfaces/interfaces";
+import { AnswerText } from "../interfaces/interfaces";
 
 interface OptionsProps {
   questionType: string;
-  answers: Answer[];
+  answers: AnswerText[];
   answer: string;
   setAnswer: React.Dispatch<React.SetStateAction<string>>;
   setQuestionType: React.Dispatch<React.SetStateAction<string>>;
-  setAnswers: React.Dispatch<React.SetStateAction<Answer[]>>;
+  setAnswers: React.Dispatch<React.SetStateAction<AnswerText[]>>;
   question: string;
   setQuestion: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -32,7 +32,13 @@ const FormAnswerOptions: React.FC<OptionsProps> = ({
   };
 
   const renderDropdownOptions = () => {
-    const options = ["Один ответ", "Несколько ответов", "Текст"];
+    const options = [
+      "Один ответ",
+      "Несколько ответов",
+      "Текст",
+      "Изображения(одно)",
+      "Изображения(несколько)",
+    ];
 
     return options.map((option) => (
       <li key={option}>
@@ -49,14 +55,17 @@ const FormAnswerOptions: React.FC<OptionsProps> = ({
   return (
     <div className="quiz focus-border-left ease-transition flex-column bg-white">
       <div className="form-settings">
-        <input
-          type="text"
-          placeholder="Вопрос"
-          className="focus-border-bottom ease-transition"
-          onKeyDown={preventSubmit}
-          value={question}
-          onChange={handleChange}
-        />
+        <p className="required">
+          <input
+            type="text"
+            placeholder="Вопрос"
+            className="focus-border-bottom ease-transition required"
+            onKeyDown={preventSubmit}
+            value={question}
+            onChange={handleChange}
+            required
+          />
+        </p>
         <div className="dropdown sm:dropdown-left ">
           <label tabIndex={0} className="btn m-1 capitalize border-2 border-gray-300">
             {questionType}
@@ -70,7 +79,6 @@ const FormAnswerOptions: React.FC<OptionsProps> = ({
         </div>
       </div>
 
-      
       <FormAnswers
         answers={answers}
         setAnswers={setAnswers}

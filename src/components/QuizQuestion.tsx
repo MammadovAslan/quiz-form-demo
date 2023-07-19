@@ -52,7 +52,13 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
   };
 
   const renderDropdownOptions = () => {
-    const options = ["Один ответ", "Несколько ответов", "Текст"];
+    const options = [
+      "Один ответ",
+      "Несколько ответов",
+      "Текст",
+      "Изображения(одно)",
+      "Изображения(несколько)",
+    ];
 
     return options.map((option) => (
       <li key={option}>
@@ -71,6 +77,9 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
 
     setQuestions(arr);
   };
+
+  const isImageQuestion =
+    questionType === "Изображения(одно)" || questionType === "Изображения(несколько)";
 
   if (isModifiable) {
     return (
@@ -112,15 +121,25 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
   }
 
   return (
-    <div className="question  group relative">
+    <div className="question  group relative sm:w-[36rem]">
       <div className="flex flex-col sm:flex-row gap-2 justify-between mb-2">
         <h3 className="font-bold">{questionTitle}</h3>
         <div className="p-2 border border-1-grey self-start rounded-lg">{questionType}</div>
       </div>
-      <ul>
+      <ul className={`${isImageQuestion ? "image-grid" : ""} mb-8`}>
         {answers.map((answer) => (
-          <li key={uuidv4()} className={`${answer.isCorrect ? "correct-answer" : ""} answer`}>
-            {answer.answerTitle}
+          <li
+            key={uuidv4()}
+            className={`${answer.isCorrect && !isImageQuestion ? "correct-answer" : ""}  answer`}
+          >
+            {isImageQuestion ? (
+              <img
+                src={answer.answerTitle}
+                className={`border-2 ${answer.isCorrect ? "image-correct" : ""}`}
+              />
+            ) : (
+              answer.answerTitle
+            )}
           </li>
         ))}
       </ul>

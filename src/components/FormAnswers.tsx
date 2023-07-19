@@ -1,11 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { Answer } from "../interfaces/interfaces";
+import { AnswerText } from "../interfaces/interfaces";
+import ImageAnswers from "./ImageAnswers";
 
 interface AnswersProps {
-  answers: Answer[];
-  setAnswers: React.Dispatch<React.SetStateAction<Answer[]>>;
+  answers: AnswerText[];
+  setAnswers: React.Dispatch<React.SetStateAction<AnswerText[]>>;
   answer: string;
   setAnswer: React.Dispatch<React.SetStateAction<string>>;
   questionType: string;
@@ -94,12 +95,24 @@ const FormAnswers: React.FC<AnswersProps> = ({
         setAnswers(arr);
       }
     }
+ 
   }, [questionType, setAnswers, setAnswer]);
 
   const canAddAnswer = questionType !== "Текст" || answers.length === 0;
 
+  if (questionType === "Изображения(одно)" || questionType === "Изображения(несколько)")
+    return (
+      <ImageAnswers
+        answer={answer}
+        answers={answers}
+        questionType={questionType}
+        setAnswer={setAnswer}
+        setAnswers={setAnswers}
+      />
+    );
+
   return (
-    <ul className="mx-4 flex-column gap-4">
+    <ul className="mx-4 flex-column gap-4 ">
       {answers.map((el, index) => (
         <li key={uuidv4()} className="h-8 flex items-center">
           <div className="flex items-center gap-2">

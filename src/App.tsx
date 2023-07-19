@@ -4,7 +4,7 @@ import Layout from "./layout/Layout";
 
 const App = () => {
   return (
-    <div className="bg-slate-100 h-screen">
+    <div className="bg-slate-100 min-h-screen">
       <Routes>
         <Route element={<Layout />}>
           <Route element={<Main />} path="/" />

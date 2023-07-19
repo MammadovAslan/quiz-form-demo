@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import FormAnswerOptions from "./FormAnswerOptions";
 import { preventSubmit } from "../utils/formUtils";
-import { NewQuiz, Answer, Question } from "../interfaces/interfaces";
+import { NewQuiz, AnswerText, Question } from "../interfaces/interfaces";
 import { v4 as uuidv4 } from "uuid";
 import QuizQuestion from "./QuizQuestion";
 
@@ -13,7 +13,7 @@ interface FormProps {
 const Form: React.FC<FormProps> = ({ data, setData }) => {
   const [questionType, setQuestionType] = useState<string>("Один ответ");
   const [description, setDescription] = useState("");
-  const [answers, setAnswers] = useState<Answer[]>([]);
+  const [answers, setAnswers] = useState<AnswerText[]>([]);
   const [question, setQuestion] = useState("");
   const [quizTitle, setQuizTitle] = useState("");
   const [modifiable, setModifiable] = useState(false);
@@ -38,7 +38,7 @@ const Form: React.FC<FormProps> = ({ data, setData }) => {
       answers.some((answer) => answer.isCorrect)
     ) {
       const obj: Question = {
-        id:uuidv4(),
+        id: uuidv4(),
         answers,
         questionType,
         questionTitle: question,
@@ -76,21 +76,23 @@ const Form: React.FC<FormProps> = ({ data, setData }) => {
     <div className="self-center flex flex-col">
       <form className="form " onSubmit={submitHandler}>
         <div className="form-header focus-border-left ease-transition bg-white">
-          {modifiable ? (
-            <input
-              type="text"
-              className="focus-border-bottom w-full mb-4 leading-7 h-[28px] title"
-              value={quizTitle}
-              ref={titleRef}
-              placeholder="Название квиза"
-              onChange={(e) => setQuizTitle(e.target.value)}
-              onBlur={() => setModifiable(false)}
-            />
-          ) : (
-            <h2 className="title mb-4 h-[28px]" onClick={clickHandler}>
-              {quizTitle || "Название квиза"}
-            </h2>
-          )}
+          <p className="required">
+            {modifiable ? (
+              <input
+                type="text"
+                className="focus-border-bottom w-full mb-4 leading-7 h-[28px] title"
+                value={quizTitle}
+                ref={titleRef}
+                placeholder="Название квиза"
+                onChange={(e) => setQuizTitle(e.target.value)}
+                onBlur={() => setModifiable(false)}
+              />
+            ) : (
+              <h2 className="title mb-4 h-[28px]" onClick={clickHandler}>
+                {quizTitle || "Название квиза"}
+              </h2>
+            )}
+          </p>
           <input
             type="text"
             placeholder="Описание"
